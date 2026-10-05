@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚠️ SECURITY WARNING - VIRUS TERDETEKSI</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #050000;
+    color: #ff2020;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.screen {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        radial-gradient(circle, #350000 0%, #090000 55%, #000 100%);
+}
+
+.warning {
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    text-align: center;
+    border: 3px solid red;
+    box-shadow: 0 0 40px red;
+    background: rgba(10,0,0,.95);
+    animation: shake .12s infinite alternate;
+}
+
+.icon {
+    font-size: 80px;
+    animation: blink .5s infinite;
+}
+
+h1 {
+    font-size: 30px;
+    text-shadow: 0 0 15px red;
+}
+
+p {
+    color: #ddd;
+    line-height: 1.6;
+}
+
+.fake-permission {
+    margin: 25px auto;
+    padding: 20px;
+    border: 1px solid #555;
+    background: #111;
+    color: white;
+    text-align: left;
+}
+
+button {
+    border: 0;
+    padding: 15px 25px;
+    margin: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.allow {
+    background: red;
+    color: white;
+}
+
+.exit {
+    background: #222;
+    color: #fff;
+}
+
+#fakeAccess {
+    display: none;
+    color: #ff3030;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#volumeExit {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.volumeBox {
+    border: 3px solid red;
+    padding: 35px;
+    box-shadow: 0 0 50px red;
+}
+
+@keyframes blink {
+    50% { opacity: .2; }
+}
+
+@keyframes shake {
+    from { transform: translateX(-2px); }
+    to { transform: translateX(2px); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="screen">
+
+    <div class="warning">
+
+        <div class="icon">☠️</div>
+
+        <h1>PERINGATAN KEAMANAN</h1>
+
+        <p>
+            AKSES VIRUS 0.1 TERDETEKSI!
+            <br>
+            Ini adalah <b>SILAKAN MINTA SANDI PENGHAPUS VIRUS KE OWNER DENGAN MEMBAYAR 500M</b>, HITUNGAN MUNDUR DIMULAI 7 JAM .
+        </p>
+
+        <div class="fake-permission">
+            <b>🔐 MASUKAN PIN SANDI</b>
+            <br><br>
+            SANDI YANG ANDA MASUKAN SALAH HARAP COBA LAGI.
+            <br><br>
+            <small>
+                HARAP MASUKAN PIN SANDI.
+            </small>
+        </div>
+
+        <button class="allow" onclick="fakePermission()">
+            MASUKAN PIN 
+        </button>
+
+        <button class="exit" onclick="closeSimulation()">
+            RESET
+        </button>
+
+        <div id="fakeAccess">
+            ⚠️ HARAP PIN SANDI DIMASUKAN SEBELUM DATA ANDA DISEBAR...
+        </div>
+
+    </div>
+
+</div>
+
+<div id="volumeExit">
+    <div class="volumeBox">
+        <h1>🔊 MODE TOXIC</h1>
+        <p>
+            Tekan kombinasi <b>+</b> dan <b>Volume</b>
+            untuk mengakhiri simulasi.
+        </p>
+        <button class="exit" onclick="closeSimulation()">
+            KEMBALI
+        </button>
+    </div>
+</div>
+
+<script>
+let plusPressed = false;
+let volumePressed = false;
+
+// Simulasi tombol IZINKAN
+function fakePermission() {
+    document.getElementById("fakeAccess").style.display = "block";
+
+    // Getar hanya jika browser/perangkat mendukung.
+    if (navigator.vibrate) {
+        navigator.vibrate([200, 100, 200]);
+    }
+}
+
+// Tombol keluar biasa
+function closeSimulation() {
+    document.body.innerHTML = `
+        <div style="
+            background:#000;
+            color:#00ff66;
+            height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            font-family:Arial;
+        ">
+            <div>
+                <h1>✓ SIMULASI SELESAI</h1>
+                <p>Tidak ada akses perangkat yang diambil.</p>
+                <p>Ini hanya demonstrasi edukasi keamanan web.</p>
+            </div>
+        </div>
+    `;
+}
+
+// Keyboard + dan tombol Volume.
+// Catatan: browser tidak dapat mengontrol tombol volume
+// fisik secara bebas. Ini hanya simulasi keyboard.
+document.addEventListener("keydown", function(e) {
+
+    if (e.key === "+" || e.key === "=") {
+        plusPressed = true;
+    }
+
+    if (
+        e.key === "AudioVolumeUp" ||
+        e.code === "AudioVolumeUp"
+    ) {
+        volumePressed = true;
+    }
+
+    if (plusPressed && volumePressed) {
+        document.getElementById("volumeExit").style.display = "flex";
+    }
+});
+
+document.addEventListener("keyup", function(e) {
+
+    if (e.key === "+" || e.key === "=") {
+        plusPressed = false;
+    }
+
+    if (
+        e.key === "AudioVolumeUp" ||
+        e.code === "AudioVolumeUp"
+    ) {
+        volumePressed = false;
+    }
+});
+</script>
+
+</body>
+</html>
